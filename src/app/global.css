@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  a {
+    @apply text-sky-600 underline underline-offset-1;
+  }
+  a:hover {
+    @apply text-sky-500 no-underline;
+  }
+}
+
+h1, h2 {
+  font-weight: bold;
+  @apply mb-2
+}
+h1 {
+  font-size: 30px;
+}
+h2 {
+  font-size: 24px;
+}
