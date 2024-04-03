@@ -1,4 +1,6 @@
 import { createLazyFileRoute } from '@tanstack/react-router'
+import { UsersList, UserTeam } from '@entities'
+
 
 export const Route = createLazyFileRoute('/team')({
   component: Team,
@@ -6,8 +8,14 @@ export const Route = createLazyFileRoute('/team')({
 
 function Team() {
   return (
-    <>
-      <h1>Моя команда</h1>
-    </>
+    <div>
+        <div>
+          <h1>Моя команда</h1>
+        </div>
+        <div className='grid md:grid-cols-2 gap-6'>
+          <UserTeam />
+          <UsersList />
+        </div>
+    </div>
   )
 }

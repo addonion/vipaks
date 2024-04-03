@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
-import UserRepositoryLangs from './UserRepositoryLangs'
-import { dateFormater } from '../../shared'
+import {RepositoryLangs} from '@entities'
+import { dateFormater } from '@shared'
+import { fetchUserRepositories } from './api'
 
 interface Repo {
   id: number,
@@ -13,7 +14,7 @@ interface Repo {
 }
 
 export function UserRepositories() {
-  const { isPending, isError, data } = useQuery({ queryKey: ['repositories'], queryFn: fetchProfileRepos, staleTime: 1000000 })
+  const { isPending, isError, data } = useQuery({ queryKey: ['repositories'], queryFn: fetchUserRepositories })
 
   if (isPending) return <div>Загрузка</div>
   if (isError) return <div>Ошибка загрузки</div>
@@ -26,7 +27,7 @@ export function UserRepositories() {
 
           <span className='text-stone-400 text-sm'>
             {repo.description && <><br />{repo.description}</>}
-            <UserRepositoryLangs url={repo.languages_url} />
+            <RepositoryLangs url={repo.languages_url} />
 
             <br />
             {dateFormater(repo.created_at)}
@@ -39,13 +40,4 @@ export function UserRepositories() {
       ))}
     </ul>
   )
-}
-
-const fetchProfileRepos = async () => {
-  const response = await fetch('https://api.github.com/users/addonion/repos')
-    if (!response.ok) {
-      throw new Error('Ошибка загрузки API с Github')
-    }
-
-    return response.json()
 }
