@@ -33,15 +33,14 @@ export function UsersList() {
     const lowercasedFilter = e.target.value.toLowerCase();
     setFiltered(data.filter((user:User) => {
       return (
-        user.login.toLowerCase().includes(lowercasedFilter) ||
-        user.html_url.toLowerCase().includes(lowercasedFilter)
+        user.login.toLowerCase().includes(lowercasedFilter)
       );
     }))
   }
 
   return (
     <div className='flex flex-col gap-4'>
-      <input type='text' ref={input} className='border rounded mt-1 px-3 py-2' onChange={filerData} placeholder='Найти по нику или url' />
+      <input type='text' ref={input} className='border rounded mt-1 px-3 py-2' onChange={filerData} placeholder='Найти по логину' />
 
       {filtered?.length && filtered.map((user: User) => (
         <div key={user.id}>
